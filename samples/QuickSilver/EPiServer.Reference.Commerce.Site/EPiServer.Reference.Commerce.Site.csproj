@@ -14,12 +14,17 @@
 		<PackageReference Include="Adyen" Version="5.7.0" />
 		<PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
 		<PackageReference Include="EPiServer.Cms" Version="12.6.0" />
+    <PackageReference Include="EPiServer.CMS.Core" Version="12.9.3" />
 		<PackageReference Include="EPiServer.Commerce" Version="14.3.0" />
+    <PackageReference Include="EPiServer.Commerce.Core" Version="14.5.0" />
+    <PackageReference Include="EPiServer.Framework" Version="12.9.3" />
 		<PackageReference Include="EPiServer.Personalization.Commerce" Version="4.0.5" />
 		<PackageReference Include="EPiServer.Tracking.Commerce" Version="4.0.5" />
 		<PackageReference Include="Lucene.Net" Version="4.8.0-beta00014" />
 		<PackageReference Include="Lucene.Net.QueryParser" Version="4.8.0-beta00014" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Optimizely.SDK" Version="3.11.1" />
+    <PackageReference Include="RestSharp" Version="108.0.1" />
 		<PackageReference Include="Serilog" Version="2.10.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />

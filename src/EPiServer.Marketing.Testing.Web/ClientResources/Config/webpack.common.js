@@ -52,8 +52,13 @@ module.exports = (env, argv) => {
             },
             {
               loader: 'css-loader',
-            },
-            {
+            }
+          ]
+        },
+        {
+          test: /\.s?ass$/,
+          use: [
+              {
               loader: 'sass-loader',
               options: {
                 sassOptions: {

@@ -28,6 +28,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using System.IO;
+using EPiServer.Marketing.Testing.Dal;
 
 namespace EPiServer.Reference.Commerce.Site
 {
@@ -105,6 +106,7 @@ namespace EPiServer.Reference.Commerce.Site
             });
 
             services.AddABTesting(_configuration.GetConnectionString("EPiServerDB"));
+            services.Configure<FullStackSettings>(_configuration.GetSection("full-stack"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
