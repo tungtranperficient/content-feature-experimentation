@@ -9,8 +9,17 @@
    'marketing-testing/TestNotification',
    'marketing-testing/command/AddTestCommandProvider',
    // For Store
-   'epi/shell/store/JsonRest'
-], function (declare, dependency, routes, _Module, editNotifications, TestNotification, AddTestCommandProvider, JsonRest) {
+    'epi/shell/store/JsonRest',
+
+   // Forms
+    'epi-forms/widget/viewmodels/FormsDataViewModel',
+
+   // dojo
+   "dojo/_base/lang",
+   "dojo/when",
+   "dojo/request/xhr",
+   "dojo/_base/Deferred"
+], function (declare, dependency, routes, _Module, editNotifications, TestNotification, AddTestCommandProvider, JsonRest, FormsDataViewModel, lang, when, xhr, Deferred) {
 
     return declare([_Module], {
 
@@ -55,6 +64,32 @@
             contextService.registerRoute("epi.marketing.testing", function (context, callerData) {
                 hashWrapper.onContextChange(context, callerData);
             }.bind(this));
+
+            var self = this;
+            // Customize FormsDataViewModel
+            // Extends the original getColumns
+            FormsDataViewModel.prototype.getColumns = function () {
+                var def = new Deferred();
+                when(this.getCurrentContext(), lang.hitch(this, function (context) {
+                    when(self._getAllColumn(context.id.split('_')[0], context.language), lang.hitch(this, function (items) {
+                        def.resolve(items);
+                    }));
+                }));
+                return def;
+            };
+        },
+
+        _getAllColumn: function (contentId, language) {
+            var deferred = new Deferred();
+            xhr('/api/episerver/abtesting/form/getColumns?formId=' + contentId + '&language=' + language, {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                method: 'GET',
+            }).then(
+                function (columns) {
+                    deferred.resolve(JSON.parse(columns));
+                }
+            );
+            return deferred.promise;
         }
     });
 });
